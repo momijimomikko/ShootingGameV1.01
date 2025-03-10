@@ -12,17 +12,6 @@ int ballY2;
 
 int ct = 100000;
 
-
-int HP1 = 300;
-int HP2 = 300;
-int HP3 = 600;
-int HP4 = 300;
-int HP5 = 600;
-int HP6 = 300;
-int HP7 = 300;
-
-int bosuHP = 3000;
-
 int MainTimer = 0;
 
 int Teki1;
@@ -684,14 +673,34 @@ public:
 class Enemy {
 public:
 
+    int HP1 = 300;
+    int HP2 = 300;
+    int HP3 = 600;
+    int HP4 = 300;
+    int HP5 = 600;
+    int HP6 = 300;
+    int HP7 = 300;
+
+    int bosuHP = 3000;
 
     int img1;
     int img2;
+    int img3;
+    int img4;
+	int img5;
+	int img6;
+    int img7;
 
     int LoadImg(void) {
 
         img1 = LoadGraph("Teki1.png");
-        img2 = LoadGraph("Teki2.png");
+        img2 = LoadGraph("Teki1.png");
+        img3 = LoadGraph("Teki2.png");
+		img4 = LoadGraph("Teki1.png");
+		img5 = LoadGraph("Teki2.png");
+		img6 = LoadGraph("Teki1.png");
+		img7 = LoadGraph("Teki1.png");
+
 
         return 0;
     }
@@ -818,6 +827,68 @@ public:
 
     }
 
+    int Hantei5(void) {
+
+        if ((ballX >= 700) && (ballX <= 780)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP5 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP5 -= 7;
+                }
+
+
+
+            }
+        }
+
+        return 0;
+
+    }
+
+    int Hantei6(void) {
+
+        if ((ballX >= 1100) && (ballX <= 1180)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP6 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP6 -= 7;
+                }
+
+
+
+            }
+        }
+
+        return 0;
+
+    }
+
     int MainTimerCount(void) {
 
         MainTimer += 1;
@@ -838,19 +909,20 @@ public:
 
             }
             else {
-                DrawString(400, 100, "やられたぁぁ", GetColor(255,255,255));
+                DrawString(400, 100, "やられたぁぁ", GetColor(255, 255, 255));
 
                 HP1 = -10;
             }
-           
+
         }
+
         if ((MainTimer >= 300) && (MainTimer <= 480)) {
 
             Hantei2();
 
             if (HP2 > 0) {
 
-                DrawGraph(1000, 300, img1, TRUE);
+                DrawGraph(1000, 300, img2, TRUE);
 
             }
             else {
@@ -866,27 +938,57 @@ public:
 
             if (HP3 > 0) {
 
-                DrawGraph(300, 200, img2, TRUE);
+                DrawGraph(300, 200, img3, TRUE);
 
             }
             else {
                 DrawString(300, 100, "やられたぁぁ", GetColor(0, 133, 255));
 
             }
+        }
 
-            if ((MainTimer >= 600) && (MainTimer <= 1000)) {
+        if ((MainTimer >= 600) && (MainTimer <= 1000)) {
 
-                Hantei4();
+            Hantei4();
 
-                if (HP4 > 0) {
+            if (HP4 > 0) {
 
-                    DrawGraph(100, 500, img2, TRUE);
+                DrawGraph(100, 500, img4, TRUE);
 
-                }
-                else {
-                    DrawString(100, 400, "やられたぁぁ", GetColor(0, 133, 255));
+            }
+            else {
+                DrawString(100, 400, "やられたぁぁ", GetColor(0, 133, 255));
 
-                }
+            }
+        }
+
+        if ((MainTimer >= 1100) && (MainTimer <= 1400)) {
+
+            Hantei5();
+
+            if (HP5 > 0) {
+
+                DrawGraph(700, 100, img5, TRUE);
+
+            }
+            else {
+                DrawString(700, 0, "やられたぁぁ", GetColor(0, 133, 255));
+
+            }
+        }
+
+        if ((MainTimer >= 1350) && (MainTimer <= 1600)) {
+
+            Hantei6();
+
+            if (HP6 > 0) {
+
+                DrawGraph(1100, 350, img6, TRUE);
+
+            }
+            else {
+                DrawString(700, 300, "やられたぁぁ", GetColor(0, 133, 255));
+
             }
         }
         return 0;
@@ -1008,6 +1110,10 @@ public:
             }
 
             ProcessMessage();
+
+			if (MainTimer >= 1600) {
+				break;
+			}
 
         }
 
