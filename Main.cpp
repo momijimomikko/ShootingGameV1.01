@@ -15,6 +15,12 @@ int HP1 = 300;
 int HP2 = 300;
 int HP3 = 600;
 int HP4 = 300;
+int HP4 = 300;
+int HP5 = 600;
+int HP6 = 300;
+int HP7 = 300;
+
+int bosuHP = 3000;
 
 int MainTimer = 0;
 
@@ -677,14 +683,6 @@ public:
 
     int img1;
     int img2;
-
-    int HP1 = 300;
-    int HP2 = 300;
-    int HP3 = 600;
-    int HP4 = 300;
-    int HP5 = 600;
-    int HP6 = 300;
-    int HP7 = 300;
 
     int LoadImg(void) {
 
