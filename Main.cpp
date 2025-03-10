@@ -14,6 +14,7 @@ int ct = 100000;
 int HP1 = 300;
 int HP2 = 300;
 int HP3 = 600;
+int HP4 = 300;
 
 int MainTimer = 0;
 
