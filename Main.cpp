@@ -1,5 +1,7 @@
 #include "DxLib.h"
 //--------------------------------------グローバル関数--------------------------------------------------------------------
+int Haikei = 0;
+
 
 int MyHP = 1000;
 
@@ -14,7 +16,6 @@ int ct = 100000;
 int HP1 = 300;
 int HP2 = 300;
 int HP3 = 600;
-int HP4 = 300;
 int HP4 = 300;
 int HP5 = 600;
 int HP6 = 300;
@@ -84,8 +85,12 @@ public:
 
             if (CheckHitKey(KEY_INPUT_Y) == 1) {
 
+                Haikei = 100;
+
             }
             if (CheckHitKey(KEY_INPUT_N) == 1) {
+
+                Haikei = 0;
                
             }
 
@@ -99,34 +104,41 @@ public:
     int img1;
     int img2;
 
+    int Page = 0;
+
     int Explane(void){
 
         img1 = LoadGraph("ShootingGameExplane.png");
         img2 = LoadGraph("ShootingGameExplane2.png");
 
-        DrawGraph(0, 0, img1, TRUE);
+		if (CheckHitKey(KEY_INPUT_SPACE) != 0) {
+			Page += 1;
+		}
 
-       if (CheckHitKey(KEY_INPUT_SPACE) != 0) {
+        if (Page >= 1) {
+            Page = 1;
+        }
 
-           while (1) {
+        if (Page == 0) {
 
-               WaitTimer(50);
+            DrawGraph(0, 0, img1, TRUE);
 
-               SetDrawScreen(DX_SCREEN_BACK);
+        }
 
-               ClearDrawScreen();
+        if (Page == 1) {
 
-               DrawGraph(0, 0, img2, TRUE);
+            DrawGraph(0, 0, img2, TRUE);
 
-               ScreenFlip();
+        }
 
-               if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
-                   break;
-               }
+        if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 
-           }
+            Haikei = 0;
 
-       }
+            Page = 0;
+
+        }
+
         DrawString(1000, 600, "エンターでタイトルに戻る\n\nスペースキーで次のページへ", GetColor(0, 0, 255));
 
 
@@ -134,20 +146,15 @@ public:
     }
 };
 
-class Homewindow {
+class HomeHome {
 public:
-
-    Explanewindow Ew;
-    Changewindow Cw;
-    WindowSetup WS;
 
     int imghome1;
     int imghome2;
     int imghome3;
 
-    int Home(void) {
-
-        while (1) {
+    int Homehome(void) {
+        if (Haikei == 0) {
 
             imghome1 = LoadGraph("ShootingHome1.png");
             imghome2 = LoadGraph("ShootingHome2.png");
@@ -163,57 +170,51 @@ public:
 
             DrawString(540, 400, "Aを入力してください", GetColor(0, 0, 255));
             DrawString(540, 525, "Bを入力してください", GetColor(255, 255, 255));
-            DrawString(1050, 680, "ESCキーで終わる", GetColor(255, 255, 255));
 
-            WS.Windowsetup();
-
+            DrawString(1000, 600, "エンターでタイトルに戻る\nスペースキーで次のページへ", GetColor(0, 0, 255));
             if (CheckHitKey(KEY_INPUT_A) != 0) {
-
-                while (1){
-
-                    SetDrawScreen(DX_SCREEN_BACK);
-
-                    ClearDrawScreen();
-
-                    Cw.Change();
-
-
-
-                    ScreenFlip();
-
-                    if (CheckHitKey(KEY_INPUT_Y) != 0) {
-                        break;
-                    }
-
-                    if (CheckHitKey(KEY_INPUT_N) != 0) {
-                        break;
-                    }
-
-                    WaitTimer(50);
-
-                }
+                Haikei = 10;
             }
 
             if (CheckHitKey(KEY_INPUT_B) != 0) {
+                Haikei = 1;
+            }
+        }
+        return 0;
+    }
+};
 
-                while (CheckHitKey(KEY_INPUT_RETURN) == 0) {
+class Homewindow {
+public:
 
-                    SetDrawScreen(DX_SCREEN_BACK);
+    Explanewindow Ew;
+    Changewindow Cw;
+    WindowSetup WS;
+    HomeHome Hh;
 
-                    ClearDrawScreen();
+    int Home(void) {
 
-                    Ew.Explane();
+        while (1)
+        {
 
-                    WS.Windowsetup();
+            WS.Windowsetup();
 
-                    ScreenFlip();
+            if (Haikei == 0) {
 
-                    WaitTimer(50);
-                }
+                Hh.Homehome();
+
             }
 
-            if (CheckHitKey(KEY_INPUT_Y) != 0) {
-                break;
+            if (Haikei == 10) {
+
+                Cw.Change();
+
+            }
+
+            if (Haikei == 1) {
+
+                Ew.Explane();
+
             }
 
             ScreenFlip();
@@ -226,9 +227,12 @@ public:
 
                 break;
             }
-        }
 
-        return 0;
+            if (Haikei == 100) {
+                break;
+            }
+        }
+		return 0;
     }
 };
 
@@ -451,7 +455,7 @@ public:
 
     int Timer(void) {
 
-        ct += 2;
+        ct += 4;
 
         if (ct > 1500) {
             ct = 1500;
@@ -928,7 +932,6 @@ public:
                 if (MainTimer > 720) {
 
                     TekiHanteiY += 6;
-
                 }
 
                 DrawGraph(TekiHanteiX, TekiHanteiY, Teki1, TRUE);
