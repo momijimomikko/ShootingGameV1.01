@@ -1,6 +1,9 @@
 #include "DxLib.h"
+#include <string>
 //--------------------------------------グローバル関数--------------------------------------------------------------------
 int Haikei = 0;
+
+int score = 0;
 
 
 int MyHP = 1000;
@@ -668,6 +671,14 @@ public:
         return 0;
     }
 
+	int scoreDisplay(void) {
+
+        DrawFormatString(1050, 20, GetColor(255, 255, 255),"Score...%d",score);
+
+		return 0;
+
+	}
+
 };
 
 class Enemy {
@@ -676,7 +687,7 @@ public:
     int HP1 = 300;
     int HP2 = 300;
     int HP3 = 600;
-    int HP4 = 300;
+    int HP4 = 600;
     int HP5 = 600;
     int HP6 = 300;
     int HP7 = 300;
@@ -696,7 +707,7 @@ public:
         img1 = LoadGraph("Teki1.png");
         img2 = LoadGraph("Teki1.png");
         img3 = LoadGraph("Teki2.png");
-		img4 = LoadGraph("Teki1.png");
+		img4 = LoadGraph("Teki2.png");
 		img5 = LoadGraph("Teki2.png");
 		img6 = LoadGraph("Teki1.png");
 		img7 = LoadGraph("Teki1.png");
@@ -889,9 +900,32 @@ public:
 
     }
 
-    int MainTimerCount(void) {
+    int Hantei7(void) {
 
-        MainTimer += 1;
+        if ((ballX >= 100) && (ballX <= 180)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP7 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP7 -= 7;
+                }
+
+
+
+            }
+        }
 
         return 0;
 
@@ -911,7 +945,7 @@ public:
             else {
                 DrawString(400, 100, "やられたぁぁ", GetColor(255, 255, 255));
 
-                HP1 = -10;
+				score += 10;
             }
 
         }
@@ -928,7 +962,8 @@ public:
             else {
                 DrawString(1000, 200, "やられたぁぁ", GetColor(255, 255, 255));
 
-                HP2 = -10;
+				score += 10;
+
             }
 
         }
@@ -944,10 +979,12 @@ public:
             else {
                 DrawString(300, 100, "やられたぁぁ", GetColor(0, 133, 255));
 
+				score += 30;
+
             }
         }
 
-        if ((MainTimer >= 600) && (MainTimer <= 1000)) {
+        if ((MainTimer >= 600) && (MainTimer <= 800)) {
 
             Hantei4();
 
@@ -959,10 +996,12 @@ public:
             else {
                 DrawString(100, 400, "やられたぁぁ", GetColor(0, 133, 255));
 
+				score += 30;
+
             }
         }
 
-        if ((MainTimer >= 1100) && (MainTimer <= 1400)) {
+        if ((MainTimer >= 900) && (MainTimer <= 1100)) {
 
             Hantei5();
 
@@ -974,10 +1013,12 @@ public:
             else {
                 DrawString(700, 0, "やられたぁぁ", GetColor(0, 133, 255));
 
+				score += 30;
+
             }
         }
 
-        if ((MainTimer >= 1350) && (MainTimer <= 1600)) {
+        if ((MainTimer >= 1050) && (MainTimer <= 1200)) {
 
             Hantei6();
 
@@ -987,10 +1028,30 @@ public:
 
             }
             else {
-                DrawString(700, 300, "やられたぁぁ", GetColor(0, 133, 255));
+                DrawString(1100, 250, "やられたぁぁ", GetColor(0, 133, 255));
+
+                score += 10;
 
             }
         }
+
+        if ((MainTimer >= 1150) && (MainTimer <= 1300)) {
+
+            Hantei7();
+
+            if (HP7 > 0) {
+
+                DrawGraph(100, 500, img7, TRUE);
+
+            }
+            else {
+                DrawString(100, 40, "やられたぁぁ", GetColor(0, 133, 255));
+
+                score += 10;
+
+            }
+        }
+
         return 0;
     }
 
@@ -1050,6 +1111,14 @@ public:
         return 0;
     }
 
+    int MainTimerCount(void) {
+
+        MainTimer += 1;
+
+        return 0;
+
+    }
+
 };
 
 
@@ -1094,6 +1163,8 @@ public:
 
             Mp.HPbar();
 
+			Mp.scoreDisplay();
+
             ScreenFlip();
 
             WaitTimer(16);
@@ -1111,7 +1182,7 @@ public:
 
             ProcessMessage();
 
-			if (MainTimer >= 1600) {
+			if (MainTimer >= 160000) {
 				break;
 			}
 
@@ -1131,10 +1202,11 @@ class End {
 public:
 
     int img1;
+    int img2;
 
-    int Endwindow(void) {
+    int Endwindow1(void) {
 
-        img1 = LoadGraph("ShootingEnd.png");
+        img1 = LoadGraph("ShootingEnd1.png");
 
         SetDrawScreen(DX_SCREEN_BACK);
 
@@ -1148,6 +1220,25 @@ public:
 
         return 0;
     }
+
+	int Endwindow2(void) {
+
+		img2 = LoadGraph("ShootingEnd2.png");
+
+		SetDrawScreen(DX_SCREEN_BACK);
+
+		ClearDrawScreen();
+
+		DrawGraph(0, 0, img2, TRUE);
+
+		ScreenFlip();
+
+		WaitTimer(3000);
+
+		return 0;
+
+
+	}
 };
 
 
@@ -1175,7 +1266,14 @@ public:
 
         Gw.window();
 
-        Ew.Endwindow();
+		if (MyHP <= 0) {
+			Ew.Endwindow2();
+        }
+        else {
+
+            Ew.Endwindow1();
+
+        }
 
         DxLib_End();
 
