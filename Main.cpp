@@ -1,5 +1,5 @@
 #include "DxLib.h"
-#include <string>
+#include "Kansuu.h"
 //--------------------------------------グローバル関数--------------------------------------------------------------------
 int Haikei = 0;
 
@@ -103,7 +103,7 @@ public:
         img1 = LoadGraph("ShootingGameExplane.png");
         img2 = LoadGraph("ShootingGameExplane2.png");
 
-		if (CheckHitKey(KEY_INPUT_SPACE) != 0) {
+		if (CheckHitKey(KEY_INPUT_1) != 0) {
 			Page += 1;
 		}
 
@@ -692,7 +692,7 @@ public:
     int HP6 = 300;
     int HP7 = 300;
 
-    int bosuHP = 3000;
+    int bosu1HP = 3000;
 
     int img1;
     int img2;
@@ -701,6 +701,15 @@ public:
 	int img5;
 	int img6;
     int img7;
+
+    int imgbosu1;
+
+    int imgWarn;
+
+	int bosu1randomX;
+	int bosu1randomY;
+
+	int bosu1ct = 0;
 
     int LoadImg(void) {
 
@@ -712,6 +721,9 @@ public:
 		img6 = LoadGraph("Teki1.png");
 		img7 = LoadGraph("Teki1.png");
 
+		imgbosu1 = LoadGraph("ShootingBosu1.png");
+
+        imgWarn = LoadGraph("ShootingWarning.png");
 
         return 0;
     }
@@ -931,6 +943,64 @@ public:
 
     }
 
+    int HanteiDisplayBosu1(void) {
+
+        if (bosu1ct != 0) {
+
+            bosu1ct -= 1;
+
+        }
+
+        if (bosu1ct == 0) {
+
+            bosu1randomX = GetRand(1100);
+
+            bosu1randomY = GetRand(500);
+
+            bosu1ct = 120;
+
+        }
+
+        DrawGraph(bosu1randomX, bosu1randomY, imgbosu1, TRUE);
+
+        if ((ballX >= bosu1randomX) && (ballX <= bosu1randomX + 30)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    bosu1HP -= 5;
+
+                }
+            }
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    bosu1HP -= 7;
+                }
+
+
+
+            }
+
+        }
+
+        return 0;
+    }
+
+    int DisappearBosu1(void) {
+
+        DrawString(300, 350, "なっっやられたぁぁ", GetColor(0,255,0));
+
+        return 0;
+    }
+
+
+
     int Display() {
 
         if ((MainTimer >= 120) && (MainTimer <= 360)) {
@@ -1048,6 +1118,29 @@ public:
                 DrawString(100, 40, "やられたぁぁ", GetColor(0, 133, 255));
 
                 score += 10;
+
+            }
+        }
+
+        if ((MainTimer >= 1400)&&(MainTimer <= 1600)) {
+
+			DrawGraph(350, 100, imgWarn, TRUE);
+
+        }
+
+
+        if ((MainTimer >= 1660) && (MainTimer <= 3600)) {
+
+            if (bosu1HP > 0) {
+
+                HanteiDisplayBosu1();
+
+            }
+            else {
+
+                DisappearBosu1();
+
+				score += 40;
 
             }
         }
