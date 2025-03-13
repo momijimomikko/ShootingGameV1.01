@@ -17,6 +17,8 @@ int ct = 100000;
 
 int MainTimer = 0;
 
+int Kougekibosu1Y;
+
 int Teki1;
 
 int TekiHanteiX;
@@ -95,39 +97,89 @@ public:
 
     int img1;
     int img2;
+    int img3;
+    int img4;
 
-    int Page = 0;
+	int Page1 = 1;
+    int Page2 = 0;
+	int Page3 = 0;
+	int Page4 = 0;
 
     int Explane(void){
 
         img1 = LoadGraph("ShootingGameExplane.png");
         img2 = LoadGraph("ShootingGameExplane2.png");
+        img3 = LoadGraph("ShootingGameExplane3.png");
+        img4 = LoadGraph("ShootingGameExplane4.png");
 
 		if (CheckHitKey(KEY_INPUT_1) != 0) {
-			Page += 1;
+
+			Page1 = 1;
+			Page2 = 0;
+			Page3 = 0;
+			Page4 = 0;
+
 		}
 
-        if (Page >= 1) {
-            Page = 1;
+        if (CheckHitKey(KEY_INPUT_2) != 0) {
+
+			Page1 = 0;
+			Page2 = 1;
+			Page3 = 0;
+			Page4 = 0;
+
         }
 
-        if (Page == 0) {
+        if (CheckHitKey(KEY_INPUT_3) != 0) {
+
+            Page1 = 0;
+			Page2 = 0;
+			Page3 = 1;
+			Page4 = 0;
+
+        }
+
+        if (CheckHitKey(KEY_INPUT_4) != 0) {
+
+            Page1 = 0;
+			Page2 = 0;
+			Page3 = 0;
+			Page4 = 1;
+
+        }
+
+        if (Page1 == 1) {
 
             DrawGraph(0, 0, img1, TRUE);
 
         }
 
-        if (Page == 1) {
+        if (Page2 == 1) {
 
             DrawGraph(0, 0, img2, TRUE);
 
         }
 
+		if (Page3 == 1) {
+
+			DrawGraph(0, 0, img3, TRUE);
+
+		}
+
+		if (Page4 == 1) {
+
+			DrawGraph(0, 0, img4, TRUE);
+
+		}
+
         if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 
             Haikei = 0;
 
-            Page = 0;
+            Page1 = 0;
+			Page2 = 0;
+			Page3 = 0;
+			Page4 = 0;
 
         }
 
@@ -602,6 +654,16 @@ public:
 
         }
 
+
+        if ((MainTimer >= 1660) && (MainTimer <= 3600)) {
+
+            if ((myY <= Kougekibosu1Y + 50) && (myY + 126 >= Kougekibosu1Y)) {
+
+                MyHP -= 2;
+
+            }
+        }
+
         return 0;
 
     }
@@ -704,6 +766,9 @@ public:
 
     int imgbosu1;
 
+    int imgbosukougeki1;
+    int imgbosukougeki2;
+
     int imgWarn;
 
 	int bosu1randomX;
@@ -722,6 +787,9 @@ public:
 		img7 = LoadGraph("Teki1.png");
 
 		imgbosu1 = LoadGraph("ShootingBosu1.png");
+
+		imgbosukougeki1 = LoadGraph("Shootingbosukougeki1.png");
+		imgbosukougeki2 = LoadGraph("Shootingbosukougeki2.png");
 
         imgWarn = LoadGraph("ShootingWarning.png");
 
@@ -943,6 +1011,26 @@ public:
 
     }
 
+    int KougekiBosu1(void) {
+
+        if (bosu1HP > 0) {
+
+            if ((bosu1ct <= 0)||(bosu1ct >= 80)) {
+
+                DrawGraph(100, Kougekibosu1Y, imgbosukougeki1, TRUE);
+
+            }
+
+            if ((bosu1ct <= 80)&&(bosu1ct >= 20)) {
+
+                DrawGraph(100, Kougekibosu1Y, imgbosukougeki2, TRUE);
+
+            }
+
+        }
+        return 0;
+    }
+
     int HanteiDisplayBosu1(void) {
 
         if (bosu1ct != 0) {
@@ -956,6 +1044,8 @@ public:
             bosu1randomX = GetRand(1100);
 
             bosu1randomY = GetRand(500);
+
+            Kougekibosu1Y = GetRand(350) + 350;
 
             bosu1ct = 120;
 
@@ -998,8 +1088,6 @@ public:
 
         return 0;
     }
-
-
 
     int Display() {
 
@@ -1134,6 +1222,8 @@ public:
             if (bosu1HP > 0) {
 
                 HanteiDisplayBosu1();
+
+				KougekiBosu1();
 
             }
             else {
