@@ -27,6 +27,8 @@ int TekiHanteiY;
 
 int HanteiTime = 0;
 
+int bosu1ct = 0;
+
 //----------------------------------------グローバル関数ここまで-----------------------------------------------------------
 //---------------------------------------WindowSetUP--------------------------------------------------------------------------------
 
@@ -657,10 +659,13 @@ public:
 
         if ((MainTimer >= 1660) && (MainTimer <= 3600)) {
 
-            if ((myY <= Kougekibosu1Y + 50) && (myY + 126 >= Kougekibosu1Y)) {
+            if ((bosu1ct <= 80) && (bosu1ct >= 20)) {
 
-                MyHP -= 2;
+                if ((myY <= Kougekibosu1Y + 50) && (myY + 126 >= Kougekibosu1Y)) {
 
+                    MyHP -= 4;
+
+                }
             }
         }
 
@@ -753,6 +758,12 @@ public:
     int HP5 = 600;
     int HP6 = 300;
     int HP7 = 300;
+	int HP8 = 300;
+    int HP9 = 600;
+	int HP10 = 600;
+	int HP11 = 600;
+	int HP12 = 300;
+	int HP13 = 600;
 
     int bosu1HP = 3000;
 
@@ -763,18 +774,30 @@ public:
 	int img5;
 	int img6;
     int img7;
+    int img8;
+	int img9;
+	int img10;
+	int img11;
+	int img12;
+	int img13;
 
     int imgbosu1;
 
+    int imgDisappear1;
+	int imgDisappear2;
+    int imgDisappearbosu1;
+
     int imgbosukougeki1;
-    int imgbosukougeki2;
+    int imgbosukougeki21;
+    int imgbosukougeki22;
+    int imgbosukougeki23;
+	int imgbosukougeki24;
 
     int imgWarn;
+    int hassya = 10;
 
 	int bosu1randomX;
 	int bosu1randomY;
-
-	int bosu1ct = 0;
 
     int LoadImg(void) {
 
@@ -785,11 +808,24 @@ public:
 		img5 = LoadGraph("Teki2.png");
 		img6 = LoadGraph("Teki1.png");
 		img7 = LoadGraph("Teki1.png");
+		img8 = LoadGraph("Teki1.png");
+		img9 = LoadGraph("Teki2.png");
+		img10 = LoadGraph("Teki2.png");
+		img11 = LoadGraph("Teki2.png");
+		img12 = LoadGraph("Teki1.png");
+		img13 = LoadGraph("Teki2.png");
 
 		imgbosu1 = LoadGraph("ShootingBosu1.png");
 
+		imgDisappear1 = LoadGraph("ShootingDisappear1.png");
+		imgDisappear2 = LoadGraph("ShootingDisappear2.png");
+		imgDisappearbosu1 = LoadGraph("ShootingDisappearbosu1.png");
+
 		imgbosukougeki1 = LoadGraph("Shootingbosukougeki1.png");
-		imgbosukougeki2 = LoadGraph("Shootingbosukougeki2.png");
+		imgbosukougeki21 = LoadGraph("Shootingbosukougeki21.png");
+		imgbosukougeki22 = LoadGraph("Shootingbosukougeki22.png");
+		imgbosukougeki23 = LoadGraph("Shootingbosukougeki23.png");
+		imgbosukougeki24 = LoadGraph("Shootingbosukougeki24.png");
 
         imgWarn = LoadGraph("ShootingWarning.png");
 
@@ -846,9 +882,6 @@ public:
 
                     HP2 -= 7;
                 }
-
-
-
             }
         }
 
@@ -877,9 +910,6 @@ public:
 
                     HP3 -= 7;
                 }
-
-
-
             }
         }
 
@@ -899,7 +929,6 @@ public:
                     HP4 -= 5;
                 }
             }
-
 
             if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
 
@@ -939,9 +968,6 @@ public:
 
                     HP5 -= 7;
                 }
-
-
-
             }
         }
 
@@ -969,15 +995,13 @@ public:
                 if (ct > 7) {
 
                     HP6 -= 7;
+
                 }
-
-
 
             }
         }
 
         return 0;
-
     }
 
     int Hantei7(void) {
@@ -1001,8 +1025,172 @@ public:
 
                     HP7 -= 7;
                 }
+            }
+        }
+
+        return 0;
+
+    }
+
+    int Hantei8(void) {
+
+        if ((ballX >= 800) && (ballX <= 880)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
 
+                if (ct > 7) {
+
+                    HP8 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP8 -= 7;
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    int Hantei9(void) {
+
+        if ((ballX >= 300) && (ballX <= 380)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP9 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP9 -= 7;
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    int Hantei10(void) {
+    
+        if ((ballX >= 600) && (ballX <= 680)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP10 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP10 -= 7;
+                }
+            }
+        }
+
+        return 0;
+    
+    }
+
+    int Hantei11(void) {
+
+        if ((ballX >= 1000) && (ballX <= 1080)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP11 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP11 -= 7;
+                }
+            }
+        }
+
+        return 0;
+    
+    }
+
+    int Hantei12(void) {
+
+        if ((ballX >= 100) && (ballX <= 180)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP12 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP12 -= 7;
+                }
+            }
+        }
+
+        return 0;
+
+    }
+
+    int Hantei13(void) {
+
+        if ((ballX >= 600) && (ballX <= 680)) {
+
+            if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP13 -= 5;
+                }
+            }
+
+
+            if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                if (ct > 7) {
+
+                    HP13 -= 7;
+                }
 
             }
         }
@@ -1021,9 +1209,39 @@ public:
 
             }
 
-            if ((bosu1ct <= 80)&&(bosu1ct >= 20)) {
+            if ((bosu1ct <= 80) && (bosu1ct >= 20)) {
 
-                DrawGraph(100, Kougekibosu1Y, imgbosukougeki2, TRUE);
+				if (hassya < 0) {
+					hassya = 10;
+				}
+
+                if (hassya < 3) {
+
+                    DrawGraph(100, Kougekibosu1Y, imgbosukougeki21, TRUE);
+
+                    hassya -= 1;
+
+                }
+
+                if ((hassya >= 3) && (hassya < 5)) {
+
+					DrawGraph(100, Kougekibosu1Y, imgbosukougeki22, TRUE);
+					hassya -= 1;
+                }
+
+                if ((hassya >= 5) && (hassya < 8)) {
+
+					DrawGraph(100, Kougekibosu1Y, imgbosukougeki23, TRUE);
+					hassya -= 1;
+
+                }
+
+                if (hassya >= 8) {
+
+					DrawGraph(100, Kougekibosu1Y, imgbosukougeki24, TRUE);
+					hassya -= 1;
+
+                }
 
             }
 
@@ -1084,7 +1302,7 @@ public:
 
     int DisappearBosu1(void) {
 
-        DrawString(300, 350, "なっっやられたぁぁ", GetColor(0,255,0));
+        DrawGraph(300, 350, imgDisappearbosu1, TRUE);
 
         return 0;
     }
@@ -1101,7 +1319,8 @@ public:
 
             }
             else {
-                DrawString(400, 100, "やられたぁぁ", GetColor(255, 255, 255));
+
+                DrawGraph(400, 100, imgDisappear1, TRUE);
 
 				score += 10;
             }
@@ -1118,7 +1337,8 @@ public:
 
             }
             else {
-                DrawString(1000, 200, "やられたぁぁ", GetColor(255, 255, 255));
+
+                DrawGraph(1000, 200, imgDisappear2, TRUE);
 
 				score += 10;
 
@@ -1135,7 +1355,8 @@ public:
 
             }
             else {
-                DrawString(300, 100, "やられたぁぁ", GetColor(0, 133, 255));
+
+                DrawGraph(300, 100, imgDisappear2, TRUE);
 
 				score += 30;
 
@@ -1152,7 +1373,8 @@ public:
 
             }
             else {
-                DrawString(100, 400, "やられたぁぁ", GetColor(0, 133, 255));
+
+                DrawGraph(100, 400, imgDisappear2,TRUE);
 
 				score += 30;
 
@@ -1169,7 +1391,8 @@ public:
 
             }
             else {
-                DrawString(700, 0, "やられたぁぁ", GetColor(0, 133, 255));
+
+                DrawGraph(700, 0, imgDisappear2, TRUE);
 
 				score += 30;
 
@@ -1186,7 +1409,8 @@ public:
 
             }
             else {
-                DrawString(1100, 250, "やられたぁぁ", GetColor(0, 133, 255));
+
+                DrawGraph(1100, 250, imgDisappear1, TRUE);
 
                 score += 10;
 
@@ -1203,7 +1427,8 @@ public:
 
             }
             else {
-                DrawString(100, 40, "やられたぁぁ", GetColor(0, 133, 255));
+
+                DrawGraph(100, 40, imgDisappear1, TRUE);
 
                 score += 10;
 
@@ -1233,6 +1458,115 @@ public:
 				score += 40;
 
             }
+        }
+
+        if ((MainTimer >= 3800) && (MainTimer <= 4000)) {
+
+            if (HP8 > 0) {
+
+				Hantei8();
+
+				DrawGraph(800, 0, img8, TRUE);
+
+			}
+            else {
+
+                DrawGraph(800, 50, imgDisappear1, TRUE);
+
+                score += 10;
+
+            }
+        }
+
+		if ((MainTimer >= 3900) && (MainTimer <= 4100)) {
+
+			if (HP9 > 0) {
+
+				Hantei9();
+
+				DrawGraph(300, 300, img9, TRUE);
+
+			}
+			else {
+
+				DrawGraph(300, 350, imgDisappear2, TRUE);
+
+				score += 30;
+
+			}
+		}
+
+		if ((MainTimer >= 4000) && (MainTimer <= 4200)) {
+
+			if (HP10 > 0) {
+
+				Hantei10();
+
+				DrawGraph(600, 100, img10, TRUE);
+
+			}
+			else {
+
+				DrawGraph(600, 0, imgDisappear2, TRUE);
+
+				score += 30;
+
+			}
+		}
+
+		if ((MainTimer >= 4150) && (MainTimer <= 4300)) {
+
+			if (HP11 > 0) {
+
+				Hantei11();
+
+				DrawGraph(1000, 500, img11, TRUE);
+
+			}
+			else {
+
+				DrawGraph(1000, 400, imgDisappear2, TRUE);
+
+				score += 30;
+
+			}
+		}
+
+		if ((MainTimer >= 4350) && (MainTimer <= 4500)) {
+
+			if (HP12 > 0) {
+
+				Hantei12();
+
+				DrawGraph(100, 300, img12, TRUE);
+
+			}
+			else {
+
+				DrawGraph(100, 200, imgDisappear1, TRUE);
+
+				score += 10;
+
+			}
+		}
+
+        if ((MainTimer >= 4530) && (MainTimer <= 4700)) {
+
+			if (HP13 > 0) {
+
+				Hantei13();
+
+				DrawGraph(600, 200, img13, TRUE);
+
+			}
+			else {
+
+				DrawGraph(600, 100, imgDisappear2, TRUE);
+
+				score += 30;
+
+			}
+
         }
 
         return 0;
@@ -1304,6 +1638,31 @@ public:
 
 };
 
+class NANIKA {
+public:
+
+    int Hack(void) {
+
+        if (CheckHitKey(KEY_INPUT_F1)) {
+
+            if (CheckHitKey(KEY_INPUT_AT)) {
+
+                if (CheckHitKey(KEY_INPUT_BACKSLASH)) {
+
+                    MyHP += 10;
+
+                }
+            }
+
+        }
+
+        return 0;
+
+    }
+
+
+};
+
 
 
 class Gamewindow {
@@ -1311,6 +1670,7 @@ public:
 
     Mypolygon Mp;
     Enemy EM;
+    NANIKA NK;
 
     int window(void) {
 
@@ -1347,6 +1707,8 @@ public:
             Mp.HPbar();
 
 			Mp.scoreDisplay();
+
+            NK.Hack();
 
             ScreenFlip();
 
