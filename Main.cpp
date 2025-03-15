@@ -8,6 +8,9 @@ int score = 0;
 
 int MyHP = 1000;
 
+int myX = 600;
+int myY = 500;
+
 int ballX;
 int ballY;
 int ballX2;
@@ -18,6 +21,17 @@ int ct = 100000;
 int MainTimer = 0;
 
 int Kougekibosu1Y;
+
+int KougekiBosu2ct = 0;
+
+int KougekiBosu2Y1 = 0;
+int KougekiBosu2Y2 = 0;
+int KougekiBosu2Y3 = 0;
+int KougekiBosu2Y4 = 0;
+
+int bosu1HP = 3000;
+
+int bosu2HP = 5000;
 
 int Teki1;
 
@@ -312,9 +326,6 @@ public:
     int imgHP8;
     int imgHP9;
     int imgHP10;
-
-    int myX = 600;
-    int myY = 500;
 
     int LoadImg(void) {
 
@@ -659,14 +670,50 @@ public:
 
         if ((MainTimer >= 1660) && (MainTimer <= 3600)) {
 
-            if ((bosu1ct <= 80) && (bosu1ct >= 20)) {
+            if (bosu1HP > 0) {
 
-                if ((myY <= Kougekibosu1Y + 50) && (myY + 126 >= Kougekibosu1Y)) {
+                if ((bosu1ct <= 80) && (bosu1ct >= 20)) {
 
-                    MyHP -= 4;
+                    if ((myY <= Kougekibosu1Y + 50) && (myY + 126 >= Kougekibosu1Y)) {
 
+                        MyHP -= 4;
+
+                    }
                 }
             }
+        }
+
+        if (MainTimer >= 5100) {
+
+			if ((KougekiBosu2ct <= 120) && (KougekiBosu2ct >= 0)) {
+
+                if (bosu2HP > 0) {
+
+                    if ((myY <= KougekiBosu2Y1 + 50) && (myY + 126 >= KougekiBosu2Y1)) {
+
+                        MyHP -= 4;
+
+                    }
+
+                    if ((myY <= KougekiBosu2Y2 + 50) && (myY + 126 >= KougekiBosu2Y2)) {
+
+                        MyHP -= 4;
+
+                    }
+
+                    if ((myY <= KougekiBosu2Y3 + 50) && (myY + 126 >= KougekiBosu2Y3)) {
+
+                        MyHP -= 4;
+
+                    }
+
+                    if ((myY <= KougekiBosu2Y4 + 50) && (myY + 126 >= KougekiBosu2Y4)) {
+
+                        MyHP -= 4;
+
+                    }
+                }
+			}
         }
 
         return 0;
@@ -765,8 +812,6 @@ public:
 	int HP12 = 300;
 	int HP13 = 600;
 
-    int bosu1HP = 3000;
-
     int img1;
     int img2;
     int img3;
@@ -782,10 +827,13 @@ public:
 	int img13;
 
     int imgbosu1;
+	int imgbosu2;
 
     int imgDisappear1;
 	int imgDisappear2;
     int imgDisappearbosu1;
+
+    int imgDisappearbosu2;
 
     int imgbosukougeki1;
     int imgbosukougeki21;
@@ -793,8 +841,15 @@ public:
     int imgbosukougeki23;
 	int imgbosukougeki24;
 
+    int imgbosu2kougeki1;
+    int imgbosu2kougeki2;
+	int imgbosu2kougeki3;
+	int imgbosu2kougeki4;
+
     int imgWarn;
     int hassya = 10;
+
+    int hassya2 = 8;
 
 	int bosu1randomX;
 	int bosu1randomY;
@@ -816,10 +871,12 @@ public:
 		img13 = LoadGraph("Teki2.png");
 
 		imgbosu1 = LoadGraph("ShootingBosu1.png");
+        imgbosu2 = LoadGraph("ShootingBosu2.png");
 
 		imgDisappear1 = LoadGraph("ShootingDisappear1.png");
 		imgDisappear2 = LoadGraph("ShootingDisappear2.png");
 		imgDisappearbosu1 = LoadGraph("ShootingDisappearbosu1.png");
+		imgDisappearbosu2 = LoadGraph("ShootingDisappearbosu1.png");
 
 		imgbosukougeki1 = LoadGraph("Shootingbosukougeki1.png");
 		imgbosukougeki21 = LoadGraph("Shootingbosukougeki21.png");
@@ -827,9 +884,15 @@ public:
 		imgbosukougeki23 = LoadGraph("Shootingbosukougeki23.png");
 		imgbosukougeki24 = LoadGraph("Shootingbosukougeki24.png");
 
+		imgbosu2kougeki1 = LoadGraph("Shootingbosu2kougeki1.png");
+		imgbosu2kougeki2 = LoadGraph("Shootingbosu2kougeki2.png");
+		imgbosu2kougeki3 = LoadGraph("Shootingbosu2kougeki3.png");
+		imgbosu2kougeki4 = LoadGraph("Shootingbosu2kougeki4.png");
+
         imgWarn = LoadGraph("ShootingWarning.png");
 
         return 0;
+
     }
 
     int Hantei1(void) {
@@ -904,7 +967,6 @@ public:
 
 
             if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
-
 
                 if (ct > 7) {
 
@@ -1249,6 +1311,121 @@ public:
         return 0;
     }
 
+    int KougekiBosu2(void) {
+
+        if (KougekiBosu2ct < 0) {
+
+            KougekiBosu2ct += 180;
+
+            KougekiBosu2Y1 = GetRand(600) + 100;
+            KougekiBosu2Y2 = GetRand(600) + 100;
+            KougekiBosu2Y3 = GetRand(600) + 100;
+			KougekiBosu2Y4 = GetRand(600) + 100;
+
+        }
+        else {
+
+			KougekiBosu2ct -= 1;
+
+        }
+
+        if (KougekiBosu2ct >= 70) {
+
+            DrawGraph(100, KougekiBosu2Y1, imgbosukougeki1, TRUE);
+			DrawGraph(100, KougekiBosu2Y2, imgbosukougeki1, TRUE);
+			DrawGraph(100, KougekiBosu2Y3, imgbosukougeki1, TRUE);
+			DrawGraph(100, KougekiBosu2Y4, imgbosukougeki1, TRUE);
+
+        }
+
+        if ((KougekiBosu2ct > 0) && (KougekiBosu2ct < 120)) {
+
+            if (hassya2 <= 0) {
+
+				hassya2 = 8;
+
+            }
+
+            if (hassya2 <= 2) {
+
+                DrawGraph(100, KougekiBosu2Y1, imgbosu2kougeki1, TRUE);
+                DrawGraph(100, KougekiBosu2Y2, imgbosu2kougeki1, TRUE);
+                DrawGraph(100, KougekiBosu2Y3, imgbosu2kougeki1, TRUE);
+				DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki1, TRUE);
+
+				hassya2 -= 1;
+
+            }
+
+			if ((hassya2 <= 4) && (hassya2 > 2)) {
+
+				DrawGraph(100, KougekiBosu2Y1, imgbosu2kougeki2, TRUE);
+				DrawGraph(100, KougekiBosu2Y2, imgbosu2kougeki2, TRUE);
+				DrawGraph(100, KougekiBosu2Y3, imgbosu2kougeki2, TRUE);
+				DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki2, TRUE);
+
+				hassya2 -= 1;
+
+			}
+
+            if ((hassya2 <= 6) && (hassya2 > 4)) {
+            
+				DrawGraph(100, KougekiBosu2Y1, imgbosu2kougeki3, TRUE);
+				DrawGraph(100, KougekiBosu2Y2, imgbosu2kougeki3, TRUE);
+				DrawGraph(100, KougekiBosu2Y3, imgbosu2kougeki3, TRUE);
+				DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki3, TRUE);
+
+				hassya2 -= 1;
+            
+            }
+
+            if ((hassya2 <= 8) && (hassya2 > 6)) {
+            
+				DrawGraph(100, KougekiBosu2Y1, imgbosu2kougeki4, TRUE);
+				DrawGraph(100, KougekiBosu2Y2, imgbosu2kougeki4, TRUE);
+				DrawGraph(100, KougekiBosu2Y3, imgbosu2kougeki4, TRUE);
+				DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki4, TRUE);
+
+				hassya2 -= 1;
+            
+            }
+
+        }
+
+
+        return 0;
+    }
+
+    int HanteiBosu2(void) {
+
+        if ((ballX >= 550) && (ballX <= 650)) {
+
+            if (myY > 500) {
+
+                if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+
+                    if (ct > 7) {
+
+                        bosu2HP -= 5;
+                    }
+                }
+
+
+                if ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
+
+
+                    if (ct > 7) {
+
+                        bosu2HP -= 7;
+                    }
+                }
+            }
+        }
+
+		return 0;
+    }
+
     int HanteiDisplayBosu1(void) {
 
         if (bosu1ct != 0) {
@@ -1408,7 +1585,7 @@ public:
                 DrawGraph(1100, 350, img6, TRUE);
 
             }
-            else {
+            else{
 
                 DrawGraph(1100, 250, imgDisappear1, TRUE);
 
@@ -1569,6 +1746,31 @@ public:
 
         }
 
+        if ((MainTimer >= 4800) && (MainTimer <= 5000)) {
+
+            DrawGraph(350, 100, imgWarn, TRUE);
+        }
+
+        if (MainTimer >= 5100) {
+
+            if (bosu2HP > 0) {
+
+                DrawGraph(550, 200, imgbosu2, TRUE);
+
+				KougekiBosu2();
+
+				HanteiBosu2();
+
+            }
+            else {
+
+                DrawGraph(600, 200, imgDisappearbosu2, TRUE);
+
+				score += 40;
+
+            }
+        }
+
         return 0;
     }
 
@@ -1649,7 +1851,7 @@ public:
 
                 if (CheckHitKey(KEY_INPUT_BACKSLASH)) {
 
-                    MyHP += 10;
+                    MyHP += 100;
 
                 }
             }
