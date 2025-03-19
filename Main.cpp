@@ -1,4 +1,4 @@
-#include "DxLib.h"
+#include <DxLib.h>
 #include "Kansuu.h"
 //--------------------------------------グローバル関数--------------------------------------------------------------------
 int Haikei = 0;
@@ -28,6 +28,8 @@ int KougekiBosu2Y1 = 0;
 int KougekiBosu2Y2 = 0;
 int KougekiBosu2Y3 = 0;
 int KougekiBosu2Y4 = 0;
+int KougekiBosu2X4 = 0;
+int KougekiBosu2X5 = 0;
 
 int bosu1HP = 3000;
 
@@ -683,31 +685,31 @@ public:
             }
         }
 
-        if (MainTimer >= 5100) {
+        if ((MainTimer >= 5100)&&(MainTimer <= 7000)) {
 
-			if ((KougekiBosu2ct <= 120) && (KougekiBosu2ct >= 0)) {
+			if ((KougekiBosu2ct <= 70) && (KougekiBosu2ct >= 0)) {
 
                 if (bosu2HP > 0) {
 
-                    if ((myY <= KougekiBosu2Y1 + 50) && (myY + 126 >= KougekiBosu2Y1)) {
+                    if ((myY <= KougekiBosu2Y1 + 20) && (myY + 126 >= KougekiBosu2Y1)) {
 
                         MyHP -= 4;
 
                     }
 
-                    if ((myY <= KougekiBosu2Y2 + 50) && (myY + 126 >= KougekiBosu2Y2)) {
+                    if ((myY <= KougekiBosu2Y2 + 20) && (myY + 126 >= KougekiBosu2Y2)) {
 
                         MyHP -= 4;
 
                     }
 
-                    if ((myY <= KougekiBosu2Y3 + 50) && (myY + 126 >= KougekiBosu2Y3)) {
+                    if ((myY <= KougekiBosu2Y3 + 20) && (myY + 126 >= KougekiBosu2Y3)) {
 
                         MyHP -= 4;
 
                     }
 
-                    if ((myY <= KougekiBosu2Y4 + 50) && (myY + 126 >= KougekiBosu2Y4)) {
+                    if ((myX <= KougekiBosu2X4 + 20) && (myX + 100 >= KougekiBosu2X4)) {
 
                         MyHP -= 4;
 
@@ -841,12 +843,19 @@ public:
     int imgbosukougeki23;
 	int imgbosukougeki24;
 
+    int imgbosukougekix1;
+
     int imgbosu2kougeki1;
     int imgbosu2kougeki2;
 	int imgbosu2kougeki3;
 	int imgbosu2kougeki4;
+	int imgbosu2kougekix1;
+	int imgbosu2kougekix2;
+	int imgbosu2kougekix3;
+	int imgbosu2kougekix4;
 
     int imgWarn;
+
     int hassya = 10;
 
     int hassya2 = 8;
@@ -884,10 +893,17 @@ public:
 		imgbosukougeki23 = LoadGraph("Shootingbosukougeki23.png");
 		imgbosukougeki24 = LoadGraph("Shootingbosukougeki24.png");
 
+		imgbosukougekix1 = LoadGraph("Shootingbosukougekix1.png");
+
 		imgbosu2kougeki1 = LoadGraph("Shootingbosu2kougeki1.png");
 		imgbosu2kougeki2 = LoadGraph("Shootingbosu2kougeki2.png");
 		imgbosu2kougeki3 = LoadGraph("Shootingbosu2kougeki3.png");
 		imgbosu2kougeki4 = LoadGraph("Shootingbosu2kougeki4.png");
+
+        imgbosu2kougekix1 = LoadGraph("Shootingbosu2kougekix1.png");
+		imgbosu2kougekix2 = LoadGraph("Shootingbosu2kougekix4.png");
+		imgbosu2kougekix3 = LoadGraph("Shootingbosu2kougekix3.png");
+		imgbosu2kougekix4 = LoadGraph("Shootingbosu2kougekix4.png");
 
         imgWarn = LoadGraph("ShootingWarning.png");
 
@@ -1321,6 +1337,8 @@ public:
             KougekiBosu2Y2 = GetRand(600) + 100;
             KougekiBosu2Y3 = GetRand(600) + 100;
 			KougekiBosu2Y4 = GetRand(600) + 100;
+			KougekiBosu2X4 = GetRand(600) + 300;
+			KougekiBosu2X5 = GetRand(600) + 300;
 
         }
         else {
@@ -1335,10 +1353,12 @@ public:
 			DrawGraph(100, KougekiBosu2Y2, imgbosukougeki1, TRUE);
 			DrawGraph(100, KougekiBosu2Y3, imgbosukougeki1, TRUE);
 			DrawGraph(100, KougekiBosu2Y4, imgbosukougeki1, TRUE);
+			DrawGraph(KougekiBosu2X4, 0, imgbosukougekix1, TRUE);
+            DrawGraph(KougekiBosu2X5, 0, imgbosukougekix1, TRUE);
 
         }
 
-        if ((KougekiBosu2ct > 0) && (KougekiBosu2ct < 120)) {
+        if ((KougekiBosu2ct > 0) && (KougekiBosu2ct < 70)) {
 
             if (hassya2 <= 0) {
 
@@ -1351,7 +1371,9 @@ public:
                 DrawGraph(100, KougekiBosu2Y1, imgbosu2kougeki1, TRUE);
                 DrawGraph(100, KougekiBosu2Y2, imgbosu2kougeki1, TRUE);
                 DrawGraph(100, KougekiBosu2Y3, imgbosu2kougeki1, TRUE);
-				DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki1, TRUE);
+                DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki1, TRUE);
+				DrawGraph(KougekiBosu2X4, 0, imgbosu2kougekix1, TRUE);
+                DrawGraph(KougekiBosu2X5, 0, imgbosu2kougekix1, TRUE);
 
 				hassya2 -= 1;
 
@@ -1363,6 +1385,8 @@ public:
 				DrawGraph(100, KougekiBosu2Y2, imgbosu2kougeki2, TRUE);
 				DrawGraph(100, KougekiBosu2Y3, imgbosu2kougeki2, TRUE);
 				DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki2, TRUE);
+				DrawGraph(KougekiBosu2X4, 0, imgbosu2kougekix2, TRUE);
+                DrawGraph(KougekiBosu2X5, 0, imgbosu2kougekix2, TRUE);
 
 				hassya2 -= 1;
 
@@ -1374,6 +1398,8 @@ public:
 				DrawGraph(100, KougekiBosu2Y2, imgbosu2kougeki3, TRUE);
 				DrawGraph(100, KougekiBosu2Y3, imgbosu2kougeki3, TRUE);
 				DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki3, TRUE);
+				DrawGraph(KougekiBosu2X4, 0, imgbosu2kougekix3, TRUE);
+                DrawGraph(KougekiBosu2X5, 0, imgbosu2kougekix3, TRUE);
 
 				hassya2 -= 1;
             
@@ -1385,6 +1411,8 @@ public:
 				DrawGraph(100, KougekiBosu2Y2, imgbosu2kougeki4, TRUE);
 				DrawGraph(100, KougekiBosu2Y3, imgbosu2kougeki4, TRUE);
 				DrawGraph(100, KougekiBosu2Y4, imgbosu2kougeki4, TRUE);
+				DrawGraph(KougekiBosu2X4, 0, imgbosu2kougekix4, TRUE);
+                DrawGraph(KougekiBosu2X5, 0, imgbosu2kougekix4, TRUE);
 
 				hassya2 -= 1;
             
@@ -1751,7 +1779,7 @@ public:
             DrawGraph(350, 100, imgWarn, TRUE);
         }
 
-        if (MainTimer >= 5100) {
+        if ((MainTimer >= 5100)&&(MainTimer <= 7000)) {
 
             if (bosu2HP > 0) {
 
@@ -1811,10 +1839,18 @@ public:
                     TekiHanteiY += 3;
 
                 }
-                if (MainTimer > 720) {
+
+                if ((MainTimer > 720)&&(MainTimer <= 3600)) {
 
                     TekiHanteiY += 6;
+
                 }
+
+				if (MainTimer > 3600) {
+
+					TekiHanteiY += 9;
+
+				}
 
                 DrawGraph(TekiHanteiX, TekiHanteiY, Teki1, TRUE);
 
@@ -1892,11 +1928,11 @@ public:
 
             ClearDrawScreen();
 
+            Mp.me();
+
             EM.MainTimerCount();
 
             Mp.Timer();
-
-            Mp.me();
 
             Mp.MyHantei();
 
@@ -1929,8 +1965,23 @@ public:
 
             ProcessMessage();
 
-			if (MainTimer >= 160000) {
-				break;
+            if (MainTimer >= 3600) {
+            
+				if (bosu1HP > 0) {
+
+					break;
+
+				}
+            
+            }
+
+			if (MainTimer >= 7000) {
+
+                if (bosu2HP > 0) {
+
+                    break;
+
+                }
 			}
 
         }
@@ -1994,7 +2045,7 @@ public:
     int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
     {
 
-        ChangeWindowMode(TRUE);
+       ChangeWindowMode(TRUE);
 
        Homewindow Hw;
 
@@ -2013,8 +2064,10 @@ public:
 
         Gw.window();
 
-		if (MyHP <= 0) {
+		if (MyHP < 1) {
+
 			Ew.Endwindow2();
+
         }
         else {
 
