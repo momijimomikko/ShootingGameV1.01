@@ -1,5 +1,5 @@
 #include <DxLib.h>
-#include "Kansuu.h"
+#include "Kansuu.hpp"
 //--------------------------------------グローバル関数--------------------------------------------------------------------
 int Haikei = 0;
 
@@ -41,7 +41,13 @@ int TekiHanteiX;
 
 int TekiHanteiY;
 
+int TekiHanteiX2;
+
+int TekiHanteiY2;
+
 int HanteiTime = 0;
+
+int HanteiTime2 = 0;
 
 int bosu1ct = 0;
 
@@ -685,7 +691,7 @@ public:
             }
         }
 
-        if ((MainTimer >= 5100)&&(MainTimer <= 7000)) {
+        if ((MainTimer >= 5100)&&(MainTimer <= 7500)) {
 
 			if ((KougekiBosu2ct <= 70) && (KougekiBosu2ct >= 0)) {
 
@@ -828,6 +834,16 @@ public:
 	int img12;
 	int img13;
 
+    int imgHP1;
+	int imgHP2;
+	int imgHP3;
+	int imgHP4;
+
+    int imgnokori1;
+	int imgnokori2;
+	int imgnokori3;
+	int imgnokori4;
+
     int imgbosu1;
 	int imgbosu2;
 
@@ -878,6 +894,16 @@ public:
 		img11 = LoadGraph("Teki2.png");
 		img12 = LoadGraph("Teki1.png");
 		img13 = LoadGraph("Teki2.png");
+
+        imgHP1 = LoadGraph("ShootingTekiHP1.png");
+		imgHP2 = LoadGraph("ShootingTekiHP2.png");
+		imgHP3 = LoadGraph("ShootingTekiHP3.png");
+		imgHP4 = LoadGraph("ShootingTekiHP4.png");
+
+		imgnokori1 = LoadGraph("Shootingnokori1.png");
+		imgnokori2 = LoadGraph("Shootingnokori2.png");
+		imgnokori3 = LoadGraph("Shootingnokori3.png");
+		imgnokori4 = LoadGraph("Shootingnokori4.png");
 
 		imgbosu1 = LoadGraph("ShootingBosu1.png");
         imgbosu2 = LoadGraph("ShootingBosu2.png");
@@ -940,6 +966,44 @@ public:
 
     }
 
+    int Bar1(void) {
+
+		if ((MainTimer >= 120) && (MainTimer <= 360)) {
+
+			if (HP1 > 0) {
+
+				if (HP1 == 300) {
+
+					DrawGraph(400, 180, imgHP4, TRUE);
+
+				}
+
+				if ((HP1 < 300) && (HP1 >= 201)) {
+
+					DrawGraph(400, 180, imgHP3, TRUE);
+
+				}
+
+				if ((HP1 < 201) && (HP1 >= 101)) {
+
+					DrawGraph(400, 180, imgHP2, TRUE);
+
+				}
+
+				if (HP1 < 101) {
+
+					DrawGraph(400, 180, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+        return 0;
+
+    }
+
     int Hantei2(void) {
 
         if ((ballX >= 1000) && (ballX <= 1080)) {
@@ -968,6 +1032,44 @@ public:
 
     }
 
+    int Bar2(void) {
+
+        if ((MainTimer >= 300) && (MainTimer <= 480)) {
+
+            if (HP2 > 0) {
+
+                if (HP2 == 300) {
+
+                    DrawGraph(1000, 280, imgHP4, TRUE);
+
+                }
+
+                if ((HP2 < 300) && (HP2 >= 201)) {
+
+                    DrawGraph(1000, 280, imgHP3, TRUE);
+
+                }
+
+                if ((HP2 < 201) && (HP2 >= 101)) {
+
+                    DrawGraph(1000, 280, imgHP2, TRUE);
+
+                }
+
+                if (HP2 < 101) {
+
+                    DrawGraph(1000, 280, imgHP1, TRUE);
+
+                }
+
+            }
+
+        }
+
+        return 0;
+
+    }
+
     int Hantei3(void) {
 
         if ((ballX >= 300) && (ballX <= 380)) {
@@ -988,12 +1090,52 @@ public:
 
                     HP3 -= 7;
                 }
+
             }
+
         }
 
         return 0;
 
     }
+
+	int Bar3(void) {
+
+		if ((MainTimer >= 520) && (MainTimer <= 700)) {
+
+			if (HP3 > 0) {
+
+				if (HP3 == 600) {
+
+					DrawGraph(300, 180, imgHP4, TRUE);
+
+				}
+
+				if ((HP3 < 600) && (HP3 >= 401)) {
+
+					DrawGraph(300, 180, imgHP3, TRUE);
+
+				}
+
+				if ((HP3 < 401) && (HP3 >= 201)) {
+
+					DrawGraph(300, 180, imgHP2, TRUE);
+
+				}
+
+				if (HP3 < 201) {
+
+					DrawGraph(300, 180, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+        return 0;
+
+	}
 
     int Hantei4(void) {
 
@@ -1025,6 +1167,43 @@ public:
 
     }
 
+	int Bar4(void) {
+
+		if ((MainTimer >= 600) && (MainTimer <= 800)) {
+
+			if (HP4 > 0) {
+
+				if (HP4 == 600) {
+
+					DrawGraph(100, 480, imgHP4, TRUE);
+
+				}
+
+				if ((HP4 < 600) && (HP4 >= 401)) {
+
+					DrawGraph(100, 480, imgHP3, TRUE);
+
+				}
+
+				if ((HP4 < 401) && (HP4 >= 201)) {
+
+					DrawGraph(100, 480, imgHP2, TRUE);
+
+				}
+
+				if (HP4 < 201) {
+
+					DrawGraph(100, 480, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+		return 0;
+	}
+
     int Hantei5(void) {
 
         if ((ballX >= 700) && (ballX <= 780)) {
@@ -1053,6 +1232,43 @@ public:
 
     }
 
+	int Bar5(void) {
+
+		if ((MainTimer >= 900) && (MainTimer <= 1100)) {
+
+			if (HP5 > 0) {
+
+				if (HP5 == 600) {
+
+					DrawGraph(700, 80, imgHP4, TRUE);
+
+				}
+
+				if ((HP5 < 600) && (HP5 >= 401)) {
+
+					DrawGraph(700, 80, imgHP3, TRUE);
+
+				}
+
+				if ((HP5 < 401) && (HP5 >= 201)) {
+
+					DrawGraph(700, 80, imgHP2, TRUE);
+
+				}
+
+				if (HP5 < 201) {
+
+					DrawGraph(700, 80, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+		return 0;
+	}
+
     int Hantei6(void) {
 
         if ((ballX >= 1100) && (ballX <= 1180)) {
@@ -1077,6 +1293,43 @@ public:
                 }
 
             }
+        }
+
+        return 0;
+    }
+
+    int Bar6(void) {
+
+        if ((MainTimer >= 1050) && (MainTimer <= 1200)) {
+
+            if (HP6 > 0) {
+
+                if (HP6 == 300) {
+
+                    DrawGraph(1100, 330, imgHP4, TRUE);
+
+                }
+
+                if ((HP6 < 300) && (HP6 >= 201)) {
+
+                    DrawGraph(1100, 330, imgHP3, TRUE);
+
+                }
+
+                if ((HP6 < 201) && (HP6 >= 101)) {
+
+                    DrawGraph(1100, 330, imgHP2, TRUE);
+
+                }
+
+                if (HP6 < 101) {
+
+                    DrawGraph(1100, 330, imgHP1, TRUE);
+
+                }
+
+            }
+
         }
 
         return 0;
@@ -1110,6 +1363,44 @@ public:
 
     }
 
+	int Bar7(void) {
+
+		if ((MainTimer >= 1150) && (MainTimer <= 1300)) {
+
+			if (HP7 > 0) {
+
+				if (HP7 == 300) {
+
+					DrawGraph(100, 480, imgHP4, TRUE);
+
+				}
+
+				if ((HP7 < 300) && (HP7 >= 201)) {
+
+					DrawGraph(100, 480, imgHP3, TRUE);
+
+				}
+
+				if ((HP7 < 201) && (HP7 >= 101)) {
+
+					DrawGraph(100, 480, imgHP2, TRUE);
+
+				}
+
+				if (HP7 < 101) {
+
+					DrawGraph(100, 480, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+		return 0;
+
+	}
+
     int Hantei8(void) {
 
         if ((ballX >= 800) && (ballX <= 880)) {
@@ -1137,6 +1428,44 @@ public:
         return 0;
     }
 
+	int Bar8(void) {
+
+		if ((MainTimer >= 3800) && (MainTimer <= 4000)) {
+
+			if (HP8 > 0) {
+
+				if (HP8 == 300) {
+
+					DrawGraph(800, 100, imgHP4, TRUE);
+
+				}
+
+				if ((HP8 < 300) && (HP8 >= 201)) {
+
+					DrawGraph(800, 100, imgHP3, TRUE);
+
+				}
+
+				if ((HP8 < 201) && (HP8 >= 101)) {
+
+					DrawGraph(800, 100, imgHP2, TRUE);
+
+				}
+
+				if (HP8 < 101) {
+
+					DrawGraph(800, 100, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+		return 0;
+
+	}
+
     int Hantei9(void) {
 
         if ((ballX >= 300) && (ballX <= 380)) {
@@ -1163,6 +1492,43 @@ public:
 
         return 0;
     }
+
+	int Bar9(void) {
+
+		if ((MainTimer >= 3900) && (MainTimer <= 4100)) {
+
+			if (HP9 > 0) {
+
+				if (HP9 == 600) {
+
+					DrawGraph(300, 280, imgHP4, TRUE);
+
+				}
+
+				if ((HP9 < 600) && (HP9 >= 401)) {
+
+					DrawGraph(300, 280, imgHP3, TRUE);
+
+				}
+
+				if ((HP9 < 401) && (HP9 >= 201)) {
+
+					DrawGraph(300, 280, imgHP2, TRUE);
+
+				}
+
+				if (HP9 < 201) {
+
+					DrawGraph(300, 280, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+		return 0;
+	}
 
     int Hantei10(void) {
     
@@ -1192,6 +1558,43 @@ public:
     
     }
 
+	int Bar10(void) {
+
+		if ((MainTimer >= 4000) && (MainTimer <= 4200)) {
+
+			if (HP10 > 0) {
+
+				if (HP10 == 600) {
+
+					DrawGraph(600, 80, imgHP4, TRUE);
+
+				}
+
+				if ((HP10 < 600) && (HP10 >= 401)) {
+
+					DrawGraph(600, 80, imgHP3, TRUE);
+
+				}
+
+				if ((HP10 < 401) && (HP10 >= 201)) {
+
+					DrawGraph(600, 80, imgHP2, TRUE);
+
+				}
+
+				if (HP10 < 201) {
+
+					DrawGraph(600, 80, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+		return 0;
+	}
+
     int Hantei11(void) {
 
         if ((ballX >= 1000) && (ballX <= 1080)) {
@@ -1214,6 +1617,44 @@ public:
                     HP11 -= 7;
                 }
             }
+        }
+
+        return 0;
+    
+    }
+
+    int Bar11(void) {
+    
+        if ((MainTimer >= 4150) && (MainTimer <= 4300)) {
+
+            if (HP11 > 0) {
+
+                if (HP11 == 600) {
+
+                    DrawGraph(1000, 480, imgHP4, TRUE);
+
+                }
+
+                if ((HP11 < 600) && (HP11 >= 401)) {
+
+                    DrawGraph(1000, 480, imgHP3, TRUE);
+
+                }
+
+                if ((HP11 < 401) && (HP11 >= 201)) {
+
+                    DrawGraph(1000, 480, imgHP2, TRUE);
+
+                }
+
+                if (HP11 < 201) {
+
+                    DrawGraph(1000, 480, imgHP1, TRUE);
+
+                }
+
+            }
+
         }
 
         return 0;
@@ -1248,6 +1689,43 @@ public:
 
     }
 
+	int Bar12(void) {
+
+		if ((MainTimer >= 4350) && (MainTimer <= 4500)) {
+
+			if (HP12 > 0) {
+
+				if (HP12 == 300) {
+
+					DrawGraph(100, 280, imgHP4, TRUE);
+
+				}
+
+				if ((HP12 < 300) && (HP12 >= 201)) {
+
+					DrawGraph(100, 280, imgHP3, TRUE);
+
+				}
+
+				if ((HP12 < 201) && (HP12 >= 101)) {
+
+					DrawGraph(100, 280, imgHP2, TRUE);
+
+				}
+
+				if (HP12 < 101) {
+
+					DrawGraph(100, 280, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+		return 0;
+	}
+
     int Hantei13(void) {
 
         if ((ballX >= 600) && (ballX <= 680)) {
@@ -1275,6 +1753,43 @@ public:
 
         return 0;
 
+    }
+
+    int Bar13(void) {
+
+		if ((MainTimer >= 4530) && (MainTimer <= 4700)) {
+
+			if (HP13 > 0) {
+
+				if (HP13 == 600) {
+
+					DrawGraph(600, 180, imgHP4, TRUE);
+
+				}
+
+				if ((HP13 < 600) && (HP13 >= 401)) {
+
+					DrawGraph(600, 180, imgHP3, TRUE);
+
+				}
+
+				if ((HP13 < 401) && (HP13 >= 201)) {
+
+					DrawGraph(600, 180, imgHP2, TRUE);
+
+				}
+
+				if (HP13 < 201) {
+
+					DrawGraph(600, 180, imgHP1, TRUE);
+
+				}
+
+			}
+
+		}
+
+		return 0;
     }
 
     int KougekiBosu1(void) {
@@ -1522,6 +2037,8 @@ public:
 
                 DrawGraph(400, 200, img1, TRUE);
 
+				Bar1();
+
             }
             else {
 
@@ -1539,6 +2056,8 @@ public:
             if (HP2 > 0) {
 
                 DrawGraph(1000, 300, img2, TRUE);
+
+				Bar2();
 
             }
             else {
@@ -1558,6 +2077,8 @@ public:
 
                 DrawGraph(300, 200, img3, TRUE);
 
+				Bar3();
+
             }
             else {
 
@@ -1575,6 +2096,8 @@ public:
             if (HP4 > 0) {
 
                 DrawGraph(100, 500, img4, TRUE);
+
+				Bar4();
 
             }
             else {
@@ -1594,6 +2117,8 @@ public:
 
                 DrawGraph(700, 100, img5, TRUE);
 
+				Bar5();
+
             }
             else {
 
@@ -1612,6 +2137,8 @@ public:
 
                 DrawGraph(1100, 350, img6, TRUE);
 
+				Bar6();
+
             }
             else{
 
@@ -1629,6 +2156,8 @@ public:
             if (HP7 > 0) {
 
                 DrawGraph(100, 500, img7, TRUE);
+
+				Bar7();
 
             }
             else {
@@ -1673,6 +2202,8 @@ public:
 
 				DrawGraph(800, 0, img8, TRUE);
 
+				Bar8();
+
 			}
             else {
 
@@ -1690,6 +2221,8 @@ public:
 				Hantei9();
 
 				DrawGraph(300, 300, img9, TRUE);
+
+				Bar9();
 
 			}
 			else {
@@ -1709,6 +2242,8 @@ public:
 
 				DrawGraph(600, 100, img10, TRUE);
 
+				Bar10();
+
 			}
 			else {
 
@@ -1726,6 +2261,8 @@ public:
 				Hantei11();
 
 				DrawGraph(1000, 500, img11, TRUE);
+
+				Bar11();
 
 			}
 			else {
@@ -1745,6 +2282,8 @@ public:
 
 				DrawGraph(100, 300, img12, TRUE);
 
+				Bar12();
+
 			}
 			else {
 
@@ -1763,6 +2302,8 @@ public:
 
 				DrawGraph(600, 200, img13, TRUE);
 
+				Bar13();
+
 			}
 			else {
 
@@ -1779,7 +2320,7 @@ public:
             DrawGraph(350, 100, imgWarn, TRUE);
         }
 
-        if ((MainTimer >= 5100)&&(MainTimer <= 7000)) {
+        if ((MainTimer >= 5100)&&(MainTimer <= 7500)) {
 
             if (bosu2HP > 0) {
 
@@ -1804,10 +2345,6 @@ public:
 
     int Kougeki1(void) {
 
-        int Kakuritu = GetRand(100);
-
-        int Which = GetRand(1);
-
         int RandX = GetRand(1000);
 
         int RandY = GetRand(400);
@@ -1816,17 +2353,15 @@ public:
 
         if (HanteiTime <= 0) {
 
-                if ((Kakuritu == 100) || (Kakuritu == 50)) {
+            TekiHanteiX = RandX;
 
-                    TekiHanteiX = RandX;
+            TekiHanteiY = RandY;
 
-                    TekiHanteiY = RandY;
+            DrawGraph(TekiHanteiX, TekiHanteiY, Teki1, TRUE);
 
-                    DrawGraph(TekiHanteiX, TekiHanteiY, Teki1, TRUE);
+            HanteiTime = 1;
 
-                    HanteiTime = 1;
-
-                }
+                
         }
 
 
@@ -1842,13 +2377,13 @@ public:
 
                 if ((MainTimer > 720)&&(MainTimer <= 3600)) {
 
-                    TekiHanteiY += 6;
+                    TekiHanteiY += 5;
 
                 }
 
 				if (MainTimer > 3600) {
 
-					TekiHanteiY += 9;
+					TekiHanteiY += 7;
 
 				}
 
@@ -1865,6 +2400,54 @@ public:
 
         return 0;
     }
+
+    int Kougeki2(void) {
+
+        int RandX2 = GetRand(1000);
+
+        int RandY2 = GetRand(400);
+
+        int RandnumX2 = GetRand(1);
+
+        if (MainTimer >= 3600) {
+
+            if (HanteiTime2 <= 0) {
+
+                TekiHanteiX2 = RandX2;
+
+                TekiHanteiY2 = RandY2;
+
+                DrawGraph(TekiHanteiX2, TekiHanteiY2, Teki1, TRUE);
+
+                HanteiTime2 = 1;
+
+
+            }
+
+
+            if (HanteiTime2 == 1) {
+
+                    if (MainTimer > 3600) {
+
+                        TekiHanteiY2 += 4;
+
+                    }
+
+                    DrawGraph(TekiHanteiX2, TekiHanteiY2, Teki1, TRUE);
+
+                    if (TekiHanteiY2 >= 699) {
+
+                        HanteiTime2 = 0;
+
+                    }
+
+                }
+            }
+
+        return 0;
+
+    }
+
 
     int MainTimerCount(void) {
 
@@ -1941,6 +2524,8 @@ public:
             EM.Display();
 
             EM.Kougeki1();
+
+			EM.Kougeki2();
 
             Mp.HPbar();
 
