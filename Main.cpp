@@ -1578,7 +1578,7 @@ public:
 
 				if ((HP10 < 401) && (HP10 >= 201)) {
 
-					DrawGraph(600, 80, imgHP2, TRUE);
+                    DrawGraph(600, 80, imgHP2, TRUE);
 
 				}
 
@@ -1805,7 +1805,9 @@ public:
             if ((bosu1ct <= 80) && (bosu1ct >= 20)) {
 
 				if (hassya < 0) {
+
 					hassya = 10;
+
 				}
 
                 if (hassya < 3) {
@@ -1819,12 +1821,14 @@ public:
                 if ((hassya >= 3) && (hassya < 5)) {
 
 					DrawGraph(100, Kougekibosu1Y, imgbosukougeki22, TRUE);
+
 					hassya -= 1;
                 }
 
                 if ((hassya >= 5) && (hassya < 8)) {
 
 					DrawGraph(100, Kougekibosu1Y, imgbosukougeki23, TRUE);
+
 					hassya -= 1;
 
                 }
@@ -1832,6 +1836,7 @@ public:
                 if (hassya >= 8) {
 
 					DrawGraph(100, Kougekibosu1Y, imgbosukougeki24, TRUE);
+
 					hassya -= 1;
 
                 }
@@ -1979,11 +1984,11 @@ public:
 
         if (bosu1ct == 0) {
 
-            bosu1randomX = GetRand(1100);
+            bosu1randomX = GetRand(1050) + 50;
 
             bosu1randomY = GetRand(500);
 
-            Kougekibosu1Y = GetRand(350) + 350;
+            Kougekibosu1Y = GetRand(250) + 350;
 
             bosu1ct = 120;
 
@@ -2011,8 +2016,6 @@ public:
                     bosu1HP -= 7;
                 }
 
-
-
             }
 
         }
@@ -2022,7 +2025,7 @@ public:
 
     int DisappearBosu1(void) {
 
-        DrawGraph(300, 350, imgDisappearbosu1, TRUE);
+        DrawGraph(550, 350, imgDisappearbosu1, TRUE);
 
         return 0;
     }
@@ -2162,7 +2165,7 @@ public:
             }
             else {
 
-                DrawGraph(100, 40, imgDisappear1, TRUE);
+                DrawGraph(100, 400, imgDisappear1, TRUE);
 
                 score += 10;
 
